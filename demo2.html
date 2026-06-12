@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>M Jerseys | Mobile Premium Studio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- MOBILE-FIRST LUXURY DESIGN SYSTEM --- */
+        :root {
+            --bg-main: #fcfcfd;
+            --bg-surface: #ffffff;
+            --border-glass: rgba(0, 0, 0, 0.08);
+            --accent-gold: #b38f2e;
+            --text-main: #111111;
+            --text-muted: #666666;
+            --wc-blue: #0046c7;
+            --font-sans: 'Montserrat', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .container {
+            width: 100%;
+            padding: 0 16px;
+        }
+
+        /* --- MOBILE FIXED HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span { color: var(--accent-gold); }
+        .logo svg { width: 20px; height: 20px; fill: var(--accent-gold); }
+
+        .nav-actions {
+            font-size: 1.4rem;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -6px;
+            right: -8px;
+            background: var(--text-main);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- WORLD CUP MOBILE SCROLLING BANNER --- */
+        .wc-badge-banner {
+            background: linear-gradient(135deg, #022366 0%, #0046c7 100%);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 57px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .wc-badge-banner svg { width: 14px; height: 14px; fill: #ffd700; }
+
+        /* --- HERO INTRO SECTION --- */
+        .hero {
+            padding: 40px 0 30px;
+            text-align: center;
+            background: #fff;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        /* --- PHONE-OPTIMIZED DYNAMIC CUSTOMizer STUDIO --- */
+        .custom-studio {
+            padding: 30px 0;
+            background: #ffffff;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 500;
+        }
+
+        .section-header p {
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .jersey-preview-box {
+            position: relative;
+            background: #f8f9fa;
+            border: 1px solid var(--border-glass);
+            width: 100%;
+            aspect-ratio: 1.1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .preview-canvas-jersey {
+            max-width: 75%;
+            max-height: 75%;
+            object-fit: contain;
+        }
+
+        /* Phone layout typography layer coordinates scaling */
+        .live-text-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+        }
+
+        .live-name {
+            font-weight: 800;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            margin-top: 15px;
+        }
+
+        .live-number {
+            font-weight: 800;
+            font-size: 4rem;
+            line-height: 1;
+            margin-top: 4px;
+        }
+
+        /* Adapt colors accurately over local files dynamic layer */
+        .jersey-preview-box[data-kit="38859.webp"] .live-name,
+        .jersey-preview-box[data-kit="38859.webp"] .live-number { color: #111111; }
+        
+        .jersey-preview-box[data-kit="38861.jpg"] .live-name,
+        .jersey-preview-box[data-kit="38861.jpg"] .live-number { color: #ffd700; text-shadow: 1px 1px 2px rgba(0,0,0,0.4); }
+        
+        .jersey-preview-box[data-kit="38862.jpg"] .live-name,
+        .jersey-preview-box[data-kit="38862.jpg"] .live-number { color: #164ea4; }
+
+        .control-group {
+            margin-bottom: 16px;
+        }
+
+        .control-group label {
+            display: block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+        }
+
+        .control-input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--border-glass);
+            background: var(--bg-main);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            outline: none;
+            border-radius: 6px;
+        }
+
+        .kit-selector-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .kit-option-btn {
+            flex: 1;
+            padding: 12px 6px;
+            border: 1px solid var(--border-glass);
+            background: #fff;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+
+        .kit-option-btn.active {
+            border-color: var(--text-main);
+            background: var(--text-main);
+            color: white;
+        }
+
+        .btn-gold-mobile {
+            background: var(--accent-gold);
+            color: white;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        /* --- EXACT 3-ROW MOBILE COMPACT GRID ARCHITECTURE --- */
+        .shop-section {
+            padding: 30px 0 60px;
+        }
+
+        .products-vertical-rows {
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* Fixed space between each row item */
+        }
+
+        .row-item-card {
+            display: flex;
+            background: #ffffff;
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            overflow: hidden;
+            height: 120px; /* Exact compact uniform height constraint */
+            align-items: center;
+            position: relative;
+        }
+
+        .row-img-wrap {
+            width: 100px;
+            height: 100%;
+            background: #f9fafb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            flex-shrink: 0;
+            border-right: 1px solid var(--border-glass);
+        }
+
+        .row-img-wrap img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .row-details {
+            flex: 1;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .row-meta {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+
+        .row-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 180px;
+        }
+
+        .row-price {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        .row-action-btn {
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+            background: var(--text-main);
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        /* --- MOBILE BAG DRAWERS --- */
+        .bag-sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: #ffffff;
+            z-index: 2000;
+            transition: transform 0.3s ease-out;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bag-sidebar.active { transform: translateX(-100%); }
+
+        .bag-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 16px;
+            margin-bottom: 20px;
+        }
+
+        .bag-header h3 { font-family: var(--font-serif); font-size: 1.5rem; }
+        .close-bag { font-size: 1.5rem; cursor: pointer; }
+
+        .bag-items-list { flex: 1; overflow-y: auto; }
+
+        .bag-row-item {
+            display: flex;
+            gap: 16px;
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border-glass);
+            align-items: center;
+        }
+
+        .bag-row-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            background: #fafafa;
+        }
+
+        /* --- MOBILE CONTEXT FOOTER --- */
+        footer {
+            background: #fff;
+            padding: 40px 16px;
+            border-top: 1px solid var(--border-glass);
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <svg style="display: none;">
+        <g id="icon-wc-trophy">
+            <path d="M12 2a3.5 3.5 0 0 1 3.5 3.5c0 .9-.34 1.72-.9 2.35C15.9 8.65 17 10.2 17 12v3h-1v-3a3 3 0 0 0-6 0v3H9v-3c0-1.8 1.1-3.35 2.4-4.15A3.48 3.48 0 0 1 10.5 5.5 3.5 3.5 0 0 1 12 2m0 15a2.5 2.5 0 0 1 2.5 2.5v1.5h-5v-1.5A2.5 2.5 0 0 1 12 17z"/>
+        </g>
+    </svg>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <svg viewBox="0 0 24 24"><use href="#icon-wc-trophy"></use></svg>
+                M<span>JERSEYS</span>
+            </a>
+            <div class="nav-actions" id="bag-trigger-icon">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="cart-count" id="global-bag-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="wc-badge-banner">
+        <svg viewBox="0 0 24 24"><use href="#icon-wc-trophy"></use></svg>
+        FIFA World Cup 2026 Archive Mobile Studio
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Own Authentic Glory</h1>
+            <p>Premium tournament-ready matchwear optimized for smartphone interaction layout configuration.</p>
+        </div>
+    </section>
+
+    <section class="custom-studio" id="studio">
+        <div class="container">
+            <div class="section-header">
+                <p>Tailored Plating Engine</p>
+                <h2>Bespoke Studio</h2>
+            </div>
+
+            <div class="jersey-preview-box" id="preview-wrapper" data-kit="38859.webp">
+                <img id="studio-jersey-img" class="preview-canvas-jersey" src="38859.webp" alt="Custom Jersey">
+                
+                <div class="live-text-layer">
+                    <div class="live-name" id="live-name-display">LEGEND</div>
+                    <div class="live-number" id="live-number-display">10</div>
+                </div>
+            </div>
+
+            <div class="studio-controls">
+                <div class="control-group">
+                    <label>Select Team Template</label>
+                    <div class="kit-selector-row">
+                        <button class="kit-option-btn active" onclick="switchStudioKit('38859.webp')">Germany</button>
+                        <button class="kit-option-btn" onclick="switchStudioKit('38861.jpg')">Spain</button>
+                        <button class="kit-option-btn" onclick="switchStudioKit('38862.jpg')">Brazil</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Custom Nameplate</label>
+                    <input type="text" id="input-kit-name" class="control-input" value="LEGEND" maxlength="12">
+                </div>
+
+                <div class="control-group">
+                    <label>Squad Number</label>
+                    <input type="number" id="input-kit-number" class="control-input" value="10" min="1" max="99">
+                </div>
+
+                <button class="btn-gold-mobile" onclick="addCustomKitToBag()">Add Custom Kit ($145)</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="shop-section" id="shop">
+        <div class="container">
+            <div class="section-header">
+                <p>Catalog</p>
+                <h2>The 3-Row Collection</h2>
+            </div>
+
+            <div class="products-vertical-rows" id="shop-products-container">
+                </div>
+        </div>
+    </section>
+
+    <div class="bag-sidebar" id="global-bag-sidebar">
+        <div class="bag-header">
+            <h3>Your Bag Selection</h3>
+            <i class="fa-solid fa-xmark close-bag" id="close-bag-sidebar"></i>
+        </div>
+        <div class="bag-items-list" id="bag-items-target">
+            </div>
+        <div style="border-top: 1px solid var(--border-glass); padding-top: 15px;">
+            <div style="display: flex; justify-content: space-between; font-weight:700; font-size:1.1rem; margin-bottom:15px;">
+                <span>Total:</span>
+                <span id="bag-total-price-text">$0.00</span>
+            </div>
+            <button class="btn-gold-mobile" onclick="alert('Proceeding to checkout pipeline.')">Secure Checkout</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 M Jerseys Store. Tailored for Mobile viewports.</p>
+        <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:var(--accent-gold); margin-top:10px;"><use href="#icon-wc-trophy"></use></svg>
+    </footer>
+
+    <script>
+        // Data source mapping explicitly to your local dragged folder filenames
+        const catalog = [
+            { id: 1, team: "Germany", type: "DFB Official Template", price: 130, img: "WhatsApp Image 2026-06-12 at 09.37.45 (2).jpeg" },
+            { id: 2, team: "Spain", type: "RFEF Official Template", price: 125, img: "WhatsApp Image 2026-06-12 at 09.37.45 (1).jpeg" },
+            { id: 3, team: "Brazil", type: "CBF Official Template", price: 140, img: "WhatsApp Image 2026-06-12 at 09.37.45.jpeg" }
+        ];
+
+        let shoppingBag = [];
+
+        // Real-time custom text listeners
+        const inputName = document.getElementById('input-kit-name');
+        const inputNumber = document.getElementById('input-kit-number');
+        const liveName = document.getElementById('live-name-display');
+        const liveNumber = document.getElementById('live-number-display');
+        const previewWrapper = document.getElementById('preview-wrapper');
+
+        function updateStudioText() {
+            liveName.innerText = inputName.value || "LEGEND";
+            liveNumber.innerText = inputNumber.value || "10";
+        }
+        inputName.addEventListener('input', updateStudioText);
+        inputNumber.addEventListener('input', updateStudioText);
+
+        function switchStudioKit(fileName) {
+            document.getElementById('studio-jersey-img').src = fileName;
+            previewWrapper.setAttribute('data-kit', fileName);
+            
+            document.querySelectorAll('.kit-option-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.innerText.toLowerCase().includes(fileName.includes('38859') ? 'germany' : fileName.includes('38861') ? 'spain' : 'brazil')) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function addCustomKitToBag() {
+            const currentKit = previewWrapper.getAttribute('data-kit');
+            const customItem = {
+                id: Date.now(),
+                team: `Bespoke Custom Kit`,
+                type: `Name: ${inputName.value} | No: #${inputNumber.value}`,
+                price: 145,
+                img: currentKit,
+                qty: 1
+            };
+            shoppingBag.push(customItem);
+            updateBagUI();
+            openBagSidebar();
+        }
+
+        // Render precisely as 3 horizontal row items for clean mobile browsing
+        function renderMobileGrid() {
+            const container = document.getElementById('shop-products-container');
+            container.innerHTML = catalog.map(item => `
+                <div class="row-item-card">
+                    <div class="row-img-wrap">
+                        <img src="${item.img}" alt="${item.team}">
+                    </div>
+                    <div class="row-details">
+                        <div class="row-meta">${item.type}</div>
+                        <div class="row-title">${item.team} World Cup Matchwear</div>
+                        <div class="row-price">$${item.price}.00</div>
+                    </div>
+                    <button class="row-action-btn" onclick="addItemToBag(${item.id})">Add</button>
+                </div>
+            `).join('');
+        }
+
+        function addItemToBag(id) {
+            const prod = catalog.find(p => p.id === id);
+            const target = shoppingBag.find(item => item.id === id);
+            if(target) {
+                target.qty++;
+            } else {
+                shoppingBag.push({...prod, qty: 1});
+            }
+            updateBagUI();
+            openBagSidebar();
+        }
+
+        function updateBagUI() {
+            const container = document.getElementById('bag-items-target');
+            const totalCount = shoppingBag.reduce((acc, curr) => acc + curr.qty, 0);
+            const totalCash = shoppingBag.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
+
+            document.getElementById('global-bag-count').innerText = totalCount;
+            document.getElementById('bag-total-price-text').innerText = `$${totalCash}.00`;
+
+            container.innerHTML = shoppingBag.map(item => `
+                <div class="bag-row-item">
+                    <img src="${item.img}" alt="${item.team}">
+                    <div style="flex:1;">
+                        <div style="font-weight:700; font-size:0.85rem;">${item.team}</div>
+                        <div style="font-size:0.7rem; color:var(--text-muted);">${item.type}</div>
+                        <div style="font-weight:700; color:var(--accent-gold); font-size:0.8rem; margin-top:4px;">$${item.price}.00</div>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:10px; font-size:0.8rem;">
+                        <i class="fa-solid fa-minus" onclick="mutateQty(${item.id}, -1)"></i>
+                        <span style="font-weight:700;">${item.qty}</span>
+                        <i class="fa-solid fa-plus" onclick="mutateQty(${item.id}, 1)"></i>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function mutateQty(id, direction) {
+            const target = shoppingBag.find(item => item.id === id);
+            target.qty += direction;
+            if(target.qty <= 0) shoppingBag = shoppingBag.filter(item => item.id !== id);
+            updateBagUI();
+        }
+
+        const bagSidebar = document.getElementById('global-bag-sidebar');
+        function openBagSidebar() { bagSidebar.classList.add('active'); }
+        document.getElementById('bag-trigger-icon').addEventListener('click', openBagSidebar);
+        document.getElementById('close-bag-sidebar').addEventListener('click', () => bagSidebar.classList.remove('active'));
+
+        // Initialize layout on execution
+        renderMobileGrid();
+    </script>
+</body>
+</html>
